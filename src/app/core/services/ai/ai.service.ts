@@ -20,7 +20,7 @@ export class AiService {
 
   public generateImage(prompt: string): Observable<AiResponse> {
     return this.http.post<AiResponse>(
-      environment.API_URL_AI,
+      `${environment.API_URL_AI}`,
       {
         prompt,
         n: 2,

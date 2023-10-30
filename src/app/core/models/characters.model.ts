@@ -1,8 +1,8 @@
 export interface ResponseCharacters {
   count: number;
-  next: string;
+  next?: string;
   previous?: string;
-  results: [];
+  results: Characters[];
 }
 
 export interface Characters {

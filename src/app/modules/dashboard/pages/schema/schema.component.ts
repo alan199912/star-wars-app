@@ -157,8 +157,6 @@ export class SchemaComponent implements OnInit, OnDestroy {
     });
 
     if (index !== -1) {
-      console.log(this.data);
-
       if (!this.isFavorites) {
         this.data[index].isFavorite = !this.data[index].isFavorite;
       }

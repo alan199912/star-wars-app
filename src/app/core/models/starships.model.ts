@@ -1,6 +1,6 @@
 export interface StarShipsResponse {
   count: number;
-  next: string;
+  next?: string;
   previous?: string;
   results: StarShips[];
 }
@@ -19,7 +19,7 @@ export interface StarShips {
   hyperdrive_rating: string;
   MGLT: string;
   starship_class: string;
-  pilots: any[];
+  pilots: string[];
   films: string[];
   created: string;
   edited: string;

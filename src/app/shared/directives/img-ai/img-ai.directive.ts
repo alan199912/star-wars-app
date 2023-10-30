@@ -16,15 +16,17 @@ export class ImgAiDirective implements AfterViewInit {
   public ngAfterViewInit(): void {
     this.host.nativeElement.src = 'assets/images/loading.gif';
 
-    this.aiService.generateImage(`${this.name}, about star wars`).subscribe({
-      next: (res) => {
-        console.log(res);
-        const image = res.data[0].url;
-        this.host.nativeElement.src = image;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    if (this.name) {
+      this.aiService.generateImage(`${this.name}, about star wars`).subscribe({
+        next: (res) => {
+          console.log(res);
+          const image = res.data[0].url;
+          this.host.nativeElement.src = image;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 }

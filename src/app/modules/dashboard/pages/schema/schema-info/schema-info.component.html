@@ -1,6 +1,7 @@
 <section class="flex justify-center" id="schema-info">
-  <div class="w-full">
-    <img class="h-56 w-full object-cover" src="https://wallpaperaccess.com/full/1200257.jpg" alt="" />
+  <app-loading></app-loading>
+  <div class="w-full" *ngIf="data">
+    <img appImgAi [name]="data.name || data.title" class="h-56 w-full object-cover" alt="" />
     <h1 class="text-5xl text-white font-bold mt-5 pl-10" *ngIf="getName">
       {{ getName }}
     </h1>
@@ -26,7 +27,5 @@
     >
       <div [innerHTML]="loadInformationFilms(data)"></div>
     </div>
-
-    <app-loading></app-loading>
   </div>
 </section>

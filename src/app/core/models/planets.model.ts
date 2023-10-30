@@ -1,6 +1,6 @@
 export interface PlanetsResponse {
   count: number;
-  next: string;
+  next?: string;
   previous?: string;
   results: Planets[];
 }

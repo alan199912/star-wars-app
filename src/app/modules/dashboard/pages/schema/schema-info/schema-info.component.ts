@@ -24,10 +24,10 @@ interface Element extends Characters, Films, StarShips, Planets {}
 })
 export class SchemaInfoComponent implements OnInit {
   public data!: Element;
-  public starships: any[] = [];
-  public films: any[] = [];
-  public people: any[] = [];
-  public planets: any[] = [];
+  public starships: StarShips[] = [];
+  public films: Films[] = [];
+  public people: Characters[] = [];
+  public planets: Planets[] = [];
   public schema!: SchemaType;
   private onDestroy$: Subject<void> = new Subject();
 
@@ -106,19 +106,19 @@ export class SchemaInfoComponent implements OnInit {
     });
   }
 
-  public loadInformationCharacter(data: any) {
+  public loadInformationCharacter(data: Characters) {
     return characterTemplate(data, this.starships, this.films);
   }
 
-  public loadInformationPlanets(data: any) {
+  public loadInformationPlanets(data: Planets) {
     return planetsTemplate(data, this.people, this.films);
   }
 
-  public loadInformationStarships(data: any) {
+  public loadInformationStarships(data: StarShips) {
     return starshipsTemplate(data, this.people, this.films);
   }
 
-  public loadInformationFilms(data: any) {
+  public loadInformationFilms(data: Films) {
     return filmsTemplate(data, this.people, this.starships, this.planets);
   }
 }

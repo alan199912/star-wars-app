@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  API_KEY: process.env['API_KEY_OPEN_IA'],
-  API_URL: process.env['API_URL'],
-  API_URL_AI: process.env['API_KEY_OPEN_IA'],
+  API_KEY: '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',
+  API_URL: 'https://swapi.dev/api',
+  API_URL_AI: 'https://api.openai.com/v1/images/generations',
 };

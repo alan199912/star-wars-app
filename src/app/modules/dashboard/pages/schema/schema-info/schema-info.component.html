@@ -1,0 +1,32 @@
+<section class="flex justify-center" id="schema-info">
+  <div class="w-full">
+    <img class="h-56 w-full object-cover" src="https://wallpaperaccess.com/full/1200257.jpg" alt="" />
+    <h1 class="text-5xl text-white font-bold mt-5 pl-10" *ngIf="getName">
+      {{ getName }}
+    </h1>
+
+    <hr class="my-5 border-[#2C2C2C]" />
+
+    <div *ngIf="schema === 'people' && data && films.length > 0 && starships.length > 0">
+      <div [innerHTML]="loadInformationCharacter(data)"></div>
+    </div>
+
+    <div *ngIf="schema === 'planets' && data && films.length > 0 && people.length > 0">
+      <div [innerHTML]="loadInformationPlanets(data)"></div>
+    </div>
+
+    <div *ngIf="schema === 'starships' && data && films.length > 0">
+      <div [innerHTML]="loadInformationStarships(data)"></div>
+    </div>
+
+    <div
+      *ngIf="
+        schema === 'films' && data && planets.length > 0 && people.length > 0 && starships.length > 0
+      "
+    >
+      <div [innerHTML]="loadInformationFilms(data)"></div>
+    </div>
+
+    <app-loading></app-loading>
+  </div>
+</section>

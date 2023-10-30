@@ -1,0 +1,64 @@
+<section id="dashboard">
+  <div class="flex justify-center">
+    <div class="container rounded-lg relative">
+      <img
+        class="rounded-lg h-56 w-full object-cover"
+        src="https://wallpaperaccess.com/full/1200257.jpg"
+        alt=""
+      />
+      <div
+        class="absolute top-1/2 left-2/4 transform -translate-x-1/2 -translate-y-1/2 text-white text-center"
+      >
+        <h1 class="font-semibold text-xl">Explora el Universo de Star Wars</h1>
+        <p class="text-sm font-medium">Únete a la fuerza</p>
+      </div>
+
+      <app-search></app-search>
+    </div>
+  </div>
+
+  <div class="flex justify-center mt-32 z-20">
+    <div class="container px-10 sm:px-0">
+      <h2 class="text-white text-xl font-medium text-center sm:text-left">Personajes Populares</h2>
+      <div>
+        <div
+          class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-3"
+          *ngIf="characters.length > 0; else loading"
+        >
+          <app-card
+            *ngFor="let character of characters"
+            [data]="character"
+            schema="people"
+            (sendFavorite)="addToFavoriteCharacters($event)"
+          ></app-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-center my-10">
+    <div class="container">
+      <h2 class="text-white text-xl font-medium text-center sm:text-left">Planetas Favoritos</h2>
+      <div>
+        <div
+          class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-3"
+          *ngIf="favoritePlanets.length > 0; else noFavorite"
+        >
+          <app-card
+            *ngFor="let favorite of favoritePlanets"
+            [data]="favorite"
+            (sendFavorite)="addToFavoritePlanets($event)"
+          ></app-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noFavorite>
+    <p class="text-white text-center font-medium text-xl mt-10 mb-20">No tienes planetas favoritos</p>
+  </ng-template>
+
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+</section>

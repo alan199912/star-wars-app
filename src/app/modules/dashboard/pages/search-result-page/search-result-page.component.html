@@ -1,0 +1,60 @@
+<section class="flex justify-center" id="search-result-page">
+  <div class="container mt-5">
+    <h1 class="text-5xl text-white font-bold text-center sm:text-left">{{ search.value }}</h1>
+
+    <hr class="my-5 border-[#2C2C2C]" />
+
+    <div class="flex justify-between px-5 sm:px-0">
+      <form class="flex flex-col gap-4">
+        <label for="search" class="text-white">Filtrar los resultados</label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <input
+            type="text"
+            class="w-min-60 w-full bg-[#2C2C2C] py-2 pl-4 pr-2 rounded-3xl border-none outline-none text-white caret-slate-100"
+            id="search"
+            name="search"
+            placeholder="Search"
+            [formControl]="search"
+          />
+          <select
+            class="w-min-60 w-full bg-[#2C2C2C] border-none outline-none rounded-3xl py-2 pl-4 pr-2 text-white caret-slate-100"
+            name="filter"
+            id="filter"
+            (change)="onFilterChange($event)"
+          >
+            <option
+              class="bg-[#2C2C2C] border-none outline-none text-white caret-slate-100"
+              selected
+              disabled
+              value=""
+            >
+              Seleccione una opción
+            </option>
+            <option
+              class="bg-[#2C2C2C] border-none outline-none text-white caret-slate-100"
+              *ngFor="let schema of schemas"
+              [value]="schema.schema"
+              [selected]="filter === schema.schema"
+            >
+              {{ schema.name }}
+            </option>
+          </select>
+        </div>
+      </form>
+
+      <span class="text-white text-right sm:text-center">{{ data.length }} Resultados encontrados</span>
+    </div>
+
+    <div class="my-5 px-10 sm:px-0">
+      <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-3">
+        <app-card
+          *ngFor="let item of data"
+          [data]="item"
+          (sendFavorite)="addToFavorite($event)"
+        ></app-card>
+      </div>
+
+      <app-loading></app-loading>
+    </div>
+  </div>
+</section>

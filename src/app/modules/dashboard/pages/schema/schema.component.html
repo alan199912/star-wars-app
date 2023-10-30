@@ -1,0 +1,91 @@
+<section class="flex justify-center" id="schema">
+  <div class="container mt-5">
+    <h1 class="text-5xl text-white font-bold text-center sm:text-left">{{ title }}</h1>
+
+    <hr class="my-5 border-[#2C2C2C]" />
+
+    <div class="flex justify-center sm:block">
+      <button
+        type="button"
+        [ngClass]="{ 'bg-red-600 text-white': !isFavorites, 'text-red-500': isFavorites }"
+        class="hover:text-white border border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-900 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2"
+        (click)="getSchema()"
+      >
+        Todos
+      </button>
+      <button
+        type="button"
+        class="text-red-500 hover:text-white border border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-900 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2"
+        [ngClass]="{ 'bg-red-600 text-white': isFavorites, 'text-red-500': !isFavorites }"
+        (click)="getFavorites()"
+      >
+        Favoritos
+      </button>
+    </div>
+
+    <div class="my-5 px-10 sm:px-0">
+      <div
+        class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-3"
+        *ngIf="!isFavorites; else favorites"
+      >
+        <app-card
+          *ngFor="let item of data"
+          [data]="item"
+          [schema]="schema"
+          (sendFavorite)="addToFavorite($event)"
+        ></app-card>
+      </div>
+
+      <app-loading></app-loading>
+
+      <ng-template #favorites>
+        <ng-container [ngSwitch]="schema">
+          <div
+            *ngSwitchCase="'people'"
+            class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-3"
+          >
+            <app-card
+              *ngFor="let item of dataFavorites.people"
+              [data]="item"
+              (sendFavorite)="addToFavorite(item)"
+            ></app-card>
+          </div>
+          <div
+            *ngSwitchCase="'films'"
+            class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-3"
+          >
+            <app-card
+              *ngFor="let item of dataFavorites.films"
+              [data]="item"
+              (sendFavorite)="addToFavorite(item)"
+            ></app-card>
+          </div>
+          <div
+            *ngSwitchCase="'planets'"
+            class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-3"
+          >
+            <app-card
+              *ngFor="let item of dataFavorites.planets"
+              [data]="item"
+              (sendFavorite)="addToFavorite(item)"
+            ></app-card>
+          </div>
+          <div
+            *ngSwitchCase="'starships'"
+            class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-3"
+          >
+            <app-card
+              *ngFor="let item of dataFavorites.starships"
+              [data]="item"
+              (sendFavorite)="addToFavorite(item)"
+            ></app-card>
+          </div>
+        </ng-container>
+      </ng-template>
+
+      <ng-container *ngIf="isFavorites && dataFavorites[schema].length === 0">
+        <p class="text-white text-center font-medium text-xl mt-10 mb-20">No tienes favoritos</p>
+      </ng-container>
+    </div>
+  </div>
+</section>
